@@ -7,9 +7,6 @@ value class Token(
     val code: String,
 ) {
     companion object {
-        fun generate() =
-            Token(
-                code = UUID.randomUUID().toString().replace("-", ""),
-            )
+        fun generate(): Token = Token(code = UUID.randomUUID().toString().replace("-", ""))
     }
 }

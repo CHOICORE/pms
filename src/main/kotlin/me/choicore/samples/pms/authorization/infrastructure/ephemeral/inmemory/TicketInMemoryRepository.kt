@@ -1,5 +1,16 @@
-package me.choicore.samples.pms
+package me.choicore.samples.pms.authorization.infrastructure.ephemeral.inmemory
 
+import me.choicore.samples.pms.AccessDecision
+import me.choicore.samples.pms.Destination
+import me.choicore.samples.pms.Dong
+import me.choicore.samples.pms.Ho
+import me.choicore.samples.pms.LicensePlate
+import me.choicore.samples.pms.LicensePlateNumber
+import me.choicore.samples.pms.Vehicle
+import me.choicore.samples.pms.authorization.domain.Ticket
+import me.choicore.samples.pms.authorization.domain.TicketRepository
+import me.choicore.samples.pms.authorization.domain.TicketStatus
+import me.choicore.samples.pms.authorization.domain.Token
 import org.springframework.stereotype.Repository
 
 @Repository
@@ -10,7 +21,7 @@ class TicketInMemoryRepository : TicketRepository {
         token: Token,
     ): Ticket? =
         Ticket(
-            code = token,
+            token = token,
             complexId = complexId,
             parkingLotId = parkingLotId,
             destination =

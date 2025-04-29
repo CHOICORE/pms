@@ -7,3 +7,17 @@ spring:
   threads:
     virtual:
       enabled: true
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/parking
+    username: user
+    password: secret
+
+  data:
+    redis:
+      client-type: lettuce
+      host: localhost
+      port: 6379
+      database: 0
+      repositories:
+        enabled: false

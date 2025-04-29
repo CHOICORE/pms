@@ -1,4 +1,4 @@
-package me.choicore.samples.pms
+package me.choicore.samples.pms.authorization.domain
 
 interface TicketRepository {
     fun findByComplexIdAndParkingLotIdAndToken(

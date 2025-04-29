@@ -1,5 +1,9 @@
-package me.choicore.samples.pms
+package me.choicore.samples.pms.access.application
 
+import me.choicore.samples.pms.AccessDirection
+import me.choicore.samples.pms.authorization.domain.TicketFinder
+import me.choicore.samples.pms.authorization.domain.Token
+import me.choicore.samples.pms.authorization.infrastructure.ephemeral.inmemory.TicketInMemoryRepository
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
@@ -12,7 +16,7 @@ class AccessManagerTests {
         sut.access(
             1,
             1,
-            Token.generate(),
+            Token.Companion.generate(),
             LocalDateTime.now(),
             AccessDirection.IN,
         )

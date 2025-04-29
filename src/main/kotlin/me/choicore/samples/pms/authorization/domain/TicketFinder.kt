@@ -1,4 +1,4 @@
-package me.choicore.samples.pms
+package me.choicore.samples.pms.authorization.domain
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -11,14 +11,14 @@ class TicketFinder(
     fun find(
         complexId: Long,
         parkingLotId: Long,
-        code: Token,
+        token: Token,
     ): Ticket? {
         val found: Ticket? =
             ticketRepository
                 .findByComplexIdAndParkingLotIdAndToken(
                     complexId = complexId,
                     parkingLotId = parkingLotId,
-                    token = code,
+                    token = token,
                 )
 
         return found

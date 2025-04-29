@@ -1,5 +1,8 @@
-package me.choicore.samples.pms
+package me.choicore.samples.pms.authorization.domain
 
+import me.choicore.samples.pms.AccessDecision
+import me.choicore.samples.pms.Destination
+import me.choicore.samples.pms.Vehicle
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
@@ -7,7 +10,7 @@ data class Ticket(
     val id: Long = 0,
     val complexId: Long,
     val parkingLotId: Long,
-    val code: Token,
+    val token: Token,
     val destination: Destination?,
     val vehicle: Vehicle,
     val decision: AccessDecision,

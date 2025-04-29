@@ -1,5 +1,9 @@
-package me.choicore.samples.pms
+package me.choicore.samples.pms.access.presentation.web
 
+import me.choicore.samples.pms.AccessDirection
+import me.choicore.samples.pms.LicensePlateNumber
+import me.choicore.samples.pms.access.application.AccessManager
+import me.choicore.samples.pms.authorization.domain.Token
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -15,13 +19,13 @@ class AccessController(
 ) {
     @PostMapping(value = ["/accesses"], headers = ["X-Pass-Token", "X-Pass-Time", "X-Pass-Direction"])
     fun accesses(
-        @RequestHeader("X-Pass-Token") code: Token,
+        @RequestHeader("X-Pass-Token") token: Token,
         @RequestHeader("X-Pass-Time") timestamp: LocalDateTime,
         @RequestHeader("X-Pass-Direction") direction: AccessDirection,
     ): ResponseEntity<in Any> {
         val request =
             AccessRequest(
-                code = code,
+                token = token,
                 timestamp = timestamp,
                 direction = direction,
             )
@@ -36,7 +40,7 @@ class AccessController(
         accessManager.access(
             complexId = 0L,
             parkingLotId = 0L,
-            code = request.code,
+            token = request.token,
             timestamp = request.timestamp,
             direction = request.direction,
         )

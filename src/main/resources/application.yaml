@@ -21,3 +21,7 @@ spring:
       database: 0
       repositories:
         enabled: false
+
+  exposed:
+    generate-ddl: true
+    show-sql: true

@@ -1,7 +1,9 @@
 package me.choicore.samples.pms.access.application
 
+import me.choicore.samples.common.util.truncateToSeconds
 import me.choicore.samples.pms.AccessDirection
 import me.choicore.samples.pms.LicensePlateNumber
+import me.choicore.samples.pms.access.domain.Entry
 import me.choicore.samples.pms.authorization.domain.Ticket
 import me.choicore.samples.pms.authorization.domain.TicketFinder
 import me.choicore.samples.pms.authorization.domain.Token
@@ -46,7 +48,22 @@ class AccessManager(
         token: Token,
         enteredAt: LocalDateTime,
     ) {
-        getTicket(complexId, parkingLotId, token)
+        val ticket = getTicket(complexId, parkingLotId, token)
+        if (ticket.usable.not()) {
+            throw IllegalStateException(
+                "사용할 수 없는 통행권입니다. (상태: ${ticket.status})",
+            )
+        }
+
+        Entry(
+            complexId = ticket.complexId,
+            parkingLotId = ticket.parkingLotId,
+            token = ticket.token,
+            vehicle = ticket.vehicle,
+            destination = ticket.destination!!,
+            enteredAt = enteredAt.truncateToSeconds(),
+            registeredBy = "system",
+        )
     }
 
     private fun exit(

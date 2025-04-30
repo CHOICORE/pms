@@ -17,7 +17,5 @@ data class Ticket(
     val status: TicketStatus,
     val issuedAt: LocalDateTime = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
 ) {
-    val expired: Boolean = this.status == TicketStatus.EXPIRED
-    val usable: Boolean =
-        (!this.expired && this.decision == AccessDecision.ALLOWED) && (status == TicketStatus.ISSUED || status == TicketStatus.RENEWED)
+    val usable: Boolean = this.destination != null && this.decision == AccessDecision.ALLOWED
 }

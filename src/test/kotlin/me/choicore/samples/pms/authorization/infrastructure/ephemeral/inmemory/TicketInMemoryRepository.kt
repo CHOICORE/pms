@@ -1,9 +1,6 @@
 package me.choicore.samples.pms.authorization.infrastructure.ephemeral.inmemory
 
 import me.choicore.samples.pms.AccessDecision
-import me.choicore.samples.pms.Destination
-import me.choicore.samples.pms.Dong
-import me.choicore.samples.pms.Ho
 import me.choicore.samples.pms.LicensePlate
 import me.choicore.samples.pms.LicensePlateNumber
 import me.choicore.samples.pms.Vehicle
@@ -25,10 +22,11 @@ class TicketInMemoryRepository : TicketRepository {
             complexId = complexId,
             parkingLotId = parkingLotId,
             destination =
-                Destination(
-                    dong = Dong("101"),
-                    ho = Ho("101"),
-                ),
+            null,
+//                Destination(
+//                    dong = Dong("101"),
+//                    ho = Ho("101"),
+//                ),
             vehicle =
                 Vehicle(
                     licensePlate = LicensePlate(number = LicensePlateNumber(value = "123가4567")),
@@ -36,4 +34,6 @@ class TicketInMemoryRepository : TicketRepository {
             decision = AccessDecision.ALLOWED,
             status = TicketStatus.ISSUED,
         )
+
+    override fun save(ticket: Ticket): Ticket = ticket
 }

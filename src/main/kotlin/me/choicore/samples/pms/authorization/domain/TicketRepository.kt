@@ -6,4 +6,6 @@ interface TicketRepository {
         parkingLotId: Long,
         token: Token,
     ): Ticket?
+
+    fun save(ticket: Ticket): Ticket
 }

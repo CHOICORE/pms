@@ -37,7 +37,8 @@ class AccessManager(
         enteredAt: LocalDateTime,
     ) {
         val ticket: Ticket = ticketManager.getTicket(complexId = complexId, parkingLotId = parkingLotId, token = token)
-        accessRegistrar.register(access = Access.entry(ticket = ticket, accessedAt = enteredAt))
+        val entry = ticket.enter(at = enteredAt)
+        accessRegistrar.register(access = entry)
     }
 
     private fun exit(
@@ -47,7 +48,8 @@ class AccessManager(
         exitedAt: LocalDateTime,
     ) {
         val ticket: Ticket = ticketManager.getTicket(complexId = complexId, parkingLotId = parkingLotId, token = token)
-        accessRegistrar.register(access = Access.exit(ticket = ticket, exitedAt = exitedAt))
+        val exit = ticket.exit(at = exitedAt)
+        accessRegistrar.register(access = exit)
     }
 
     fun unknown(

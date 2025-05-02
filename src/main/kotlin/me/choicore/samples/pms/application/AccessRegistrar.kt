@@ -20,9 +20,8 @@ class AccessRegistrar(
 
         try {
             val registered: Access = accessRepository.save(access = access)
-            val event = AccessRegisteredEvent(source = registered)
             log.debug("Publishing event for registered access: id={}", registered.id)
-            eventPublisher.publish(event = event)
+            eventPublisher.publish(event = AccessRegisteredEvent(source = registered))
             return registered.id
         } catch (e: Exception) {
             log.error("Failed to register access: type={}, error={}", access::class.simpleName, e.message, e)

@@ -42,40 +42,6 @@ sealed class Access {
     companion object {
         private val log: Logger = LoggerFactory.getLogger(Access::class.java)
 
-        fun entry(
-            ticket: Ticket,
-            accessedAt: LocalDateTime,
-        ): Access {
-            check(ticket.decision == AccessDecision.ALLOWED) {
-                "통행이 불가능한 통행권입니다. (id=${ticket.token}, decision=${ticket.decision})"
-            }
-
-            check(ticket.destination != null) {
-                "통행권에 목적지 정보가 누락되어 있습니다. (id=${ticket.token}, destination=${ticket.destination})"
-            }
-
-            return Entry(
-                complexId = ticket.complexId,
-                parkingLotId = ticket.parkingLotId,
-                token = ticket.token,
-                vehicle = ticket.vehicle,
-                destination = ticket.destination,
-                enteredAt = accessedAt.truncateToSeconds(),
-            )
-        }
-
-        fun exit(
-            ticket: Ticket,
-            exitedAt: LocalDateTime,
-        ): Access =
-            Exit(
-                complexId = ticket.complexId,
-                parkingLotId = ticket.parkingLotId,
-                token = ticket.token,
-                vehicle = ticket.vehicle,
-                exitedAt = exitedAt.truncateToSeconds(),
-            )
-
         fun unknown(
             complexId: Long,
             parkingLotId: Long,

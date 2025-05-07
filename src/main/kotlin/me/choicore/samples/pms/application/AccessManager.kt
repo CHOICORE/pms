@@ -5,7 +5,7 @@ import me.choicore.samples.pms.domain.AccessDirection
 import me.choicore.samples.pms.domain.AccessDirection.IN
 import me.choicore.samples.pms.domain.AccessDirection.OUT
 import me.choicore.samples.pms.domain.LicensePlateNumber
-import me.choicore.samples.pms.domain.Ticket
+import me.choicore.samples.pms.domain.Pass
 import me.choicore.samples.pms.domain.Token
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -14,7 +14,7 @@ import java.time.LocalDateTime
 
 @Service
 class AccessManager(
-    private val ticketManager: TicketManager,
+    private val passManager: PassManager,
     private val accessRegistrar: AccessRegistrar,
 ) {
     fun access(
@@ -36,8 +36,8 @@ class AccessManager(
         token: Token,
         enteredAt: LocalDateTime,
     ) {
-        val ticket: Ticket = ticketManager.getTicket(complexId = complexId, parkingLotId = parkingLotId, token = token)
-        val entry = ticket.enter(at = enteredAt)
+        val pass: Pass = passManager.getPass(complexId = complexId, parkingLotId = parkingLotId, token = token)
+        val entry = pass.enter(at = enteredAt)
         accessRegistrar.register(access = entry)
     }
 
@@ -47,8 +47,8 @@ class AccessManager(
         token: Token,
         exitedAt: LocalDateTime,
     ) {
-        val ticket: Ticket = ticketManager.getTicket(complexId = complexId, parkingLotId = parkingLotId, token = token)
-        val exit = ticket.exit(at = exitedAt)
+        val pass: Pass = passManager.getPass(complexId = complexId, parkingLotId = parkingLotId, token = token)
+        val exit = pass.exit(at = exitedAt)
         accessRegistrar.register(access = exit)
     }
 

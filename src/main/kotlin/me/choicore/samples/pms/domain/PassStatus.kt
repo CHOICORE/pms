@@ -1,10 +1,10 @@
 package me.choicore.samples.pms.domain
 
-enum class TicketStatus {
+enum class PassStatus {
     ISSUED,
     RENEWED,
     EXPIRED,
     CANCELLED,
-    IN_USE,
-    USED,
+    ENTERED,
+    EXITED,
 }

@@ -2,7 +2,6 @@ package me.choicore.samples.pms.presentation.web
 
 import me.choicore.samples.pms.application.AccessManager
 import me.choicore.samples.pms.domain.AccessDirection
-import me.choicore.samples.pms.domain.LicensePlateNumber
 import me.choicore.samples.pms.domain.Token
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -60,10 +59,4 @@ class AccessController(
         )
         return ResponseEntity.ok(request)
     }
-
-    data class UnknownAccessRequest(
-        val lpn: LicensePlateNumber,
-        val enteredAt: LocalDateTime?,
-        val exitedAt: LocalDateTime?,
-    )
 }

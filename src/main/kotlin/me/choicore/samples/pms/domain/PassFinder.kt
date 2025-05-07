@@ -5,16 +5,16 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 
 @Component
-class TicketFinder(
-    private val ticketRepository: TicketRepository,
+class PassFinder(
+    private val passRepository: PassRepository,
 ) {
     fun find(
         complexId: Long,
         parkingLotId: Long,
         token: Token,
-    ): Ticket? {
-        val found: Ticket? =
-            ticketRepository
+    ): Pass? {
+        val found: Pass? =
+            passRepository
                 .findByComplexIdAndParkingLotIdAndToken(
                     complexId = complexId,
                     parkingLotId = parkingLotId,
@@ -25,6 +25,6 @@ class TicketFinder(
     }
 
     companion object {
-        private val log: Logger = LoggerFactory.getLogger(TicketFinder::class.java)
+        private val log: Logger = LoggerFactory.getLogger(PassFinder::class.java)
     }
 }

@@ -1,11 +1,11 @@
 package me.choicore.samples.pms.domain
 
-interface TicketRepository {
+interface PassRepository {
     fun findByComplexIdAndParkingLotIdAndToken(
         complexId: Long,
         parkingLotId: Long,
         token: Token,
-    ): Ticket?
+    ): Pass?
 
-    fun save(ticket: Ticket): Ticket
+    fun save(pass: Pass): Pass
 }

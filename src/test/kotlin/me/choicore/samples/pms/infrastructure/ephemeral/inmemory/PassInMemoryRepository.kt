@@ -6,9 +6,9 @@ import me.choicore.samples.pms.domain.Dong
 import me.choicore.samples.pms.domain.Ho
 import me.choicore.samples.pms.domain.LicensePlate
 import me.choicore.samples.pms.domain.LicensePlateNumber
-import me.choicore.samples.pms.domain.Ticket
-import me.choicore.samples.pms.domain.TicketRepository
-import me.choicore.samples.pms.domain.TicketStatus
+import me.choicore.samples.pms.domain.Pass
+import me.choicore.samples.pms.domain.PassRepository
+import me.choicore.samples.pms.domain.PassStatus
 import me.choicore.samples.pms.domain.Token
 import me.choicore.samples.pms.domain.Vehicle
 import org.springframework.context.annotation.Primary
@@ -16,13 +16,13 @@ import org.springframework.stereotype.Repository
 
 @Primary
 @Repository
-class TicketInMemoryRepository : TicketRepository {
+class PassInMemoryRepository : PassRepository {
     override fun findByComplexIdAndParkingLotIdAndToken(
         complexId: Long,
         parkingLotId: Long,
         token: Token,
-    ): Ticket? =
-        Ticket(
+    ): Pass? =
+        Pass(
             token = token,
             complexId = complexId,
             parkingLotId = parkingLotId,
@@ -36,8 +36,8 @@ class TicketInMemoryRepository : TicketRepository {
                     licensePlate = LicensePlate(number = LicensePlateNumber(value = "123가4567")),
                 ),
             decision = AccessDecision.ALLOWED,
-            status = TicketStatus.ISSUED,
+            status = PassStatus.ISSUED,
         )
 
-    override fun save(ticket: Ticket): Ticket = ticket
+    override fun save(pass: Pass): Pass = pass
 }

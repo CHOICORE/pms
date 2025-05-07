@@ -5,15 +5,17 @@ import me.choicore.samples.pms.domain.Access.Exit
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
-data class Ticket(
+data class Pass(
     val id: Long = 0,
     val complexId: Long,
     val parkingLotId: Long,
+    val permitId: Long? = null,
     val token: Token,
     val destination: Destination?,
     val vehicle: Vehicle,
     val decision: AccessDecision,
-    var status: TicketStatus,
+    var status: PassStatus,
+    val issuedBy: String,
     val issuedAt: LocalDateTime = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
 ) {
     fun enter(at: LocalDateTime): Entry {
@@ -25,7 +27,7 @@ data class Ticket(
             "통행권에 목적지 정보가 누락되어 있습니다. (id=${this.token}, destination=${this.destination})"
         }
 
-        this.status = TicketStatus.IN_USE
+        this.status = PassStatus.ENTERED
 
         return Entry(
             complexId = this.complexId,
@@ -38,7 +40,7 @@ data class Ticket(
     }
 
     fun exit(at: LocalDateTime): Exit {
-        this.status = TicketStatus.USED
+        this.status = PassStatus.EXITED
         return Exit(
             complexId = this.complexId,
             parkingLotId = this.parkingLotId,

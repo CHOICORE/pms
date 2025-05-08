@@ -1,11 +1,11 @@
 package me.choicore.samples.pms.domain
 
-interface PermitRepository {
-    fun save(permit: Permit): Permit
+interface ParkingPassRepository {
+    fun save(parkingPass: ParkingPass): ParkingPass
 
     fun findByComplexIdAndParkingLotIdAndLicensePlateNumber(
         complexId: Long,
         parkingLotId: Long,
         licensePlateNumber: LicensePlateNumber,
-    ): Permit?
+    ): ParkingPass?
 }

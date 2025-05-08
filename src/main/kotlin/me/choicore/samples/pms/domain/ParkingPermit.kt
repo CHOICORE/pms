@@ -3,7 +3,7 @@ package me.choicore.samples.pms.domain
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
-data class Permit(
+data class ParkingPermit(
     val id: Long = 0,
     val complexId: Long,
     val parkingLotId: Long,
@@ -16,11 +16,12 @@ data class Permit(
     val registeredBy: String,
     val registeredAt: LocalDateTime = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
 ) {
+    val kind: PassKind = PassKind.PARKING_PERMIT
+
     enum class Type {
         RESIDENT,
         TENANT,
-        VISITOR,
         EMPLOYEE,
-        GUEST,
+        OTHER,
     }
 }

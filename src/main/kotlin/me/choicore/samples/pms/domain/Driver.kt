@@ -1,10 +1,10 @@
 package me.choicore.samples.pms.domain
 
-data class Owner(
+data class Driver(
     val name: String? = null,
     val contact: String? = null,
 ) {
     companion object {
-        val UNKNOWN = Owner()
+        val UNKNOWN = Driver()
     }
 }

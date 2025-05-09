@@ -50,4 +50,13 @@ data class Pass(
             exitedAt = at,
         )
     }
+
+    enum class PassStatus {
+        ISSUED,
+        RENEWED,
+        EXPIRED,
+        CANCELLED,
+        ENTERED,
+        EXITED,
+    }
 }

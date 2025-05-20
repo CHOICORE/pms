@@ -19,7 +19,7 @@ data class Pass(
     val issuedBy: String,
     val issuedAt: LocalDateTime = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
 ) {
-    fun enter(at: LocalDateTime): Entry {
+    fun markAsEntered(at: LocalDateTime): Entry {
         check(this.decision == AccessDecision.ALLOWED) {
             "통행이 불가능한 통행권입니다. (id=${this.token}, decision=${this.decision})"
         }
@@ -40,8 +40,9 @@ data class Pass(
         )
     }
 
-    fun exit(at: LocalDateTime): Exit {
+    fun markAsExited(at: LocalDateTime): Exit {
         this.status = PassStatus.EXITED
+
         return Exit(
             complexId = this.complexId,
             parkingLotId = this.parkingLotId,
@@ -49,14 +50,5 @@ data class Pass(
             token = this.token,
             exitedAt = at,
         )
-    }
-
-    enum class PassStatus {
-        ISSUED,
-        RENEWED,
-        EXPIRED,
-        CANCELLED,
-        ENTERED,
-        EXITED,
     }
 }
